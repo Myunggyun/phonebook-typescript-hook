@@ -2,14 +2,21 @@ import React from "react";
 import logo from "./image/logo.jpg";
 import styled from "styled-components";
 
-function Main() {
+interface PropsData {
+  handleSearch: (data: string) => void;
+}
+
+function Main({ handleSearch }: PropsData) {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleSearch(event.target.value);
+  };
   return (
     <Home>
       <Logoscreen>
         <img src={logo} alt="logo" />
       </Logoscreen>
       <InputBox>
-        <input type="text" placeholder="검색란" />
+        <input type="text" placeholder="검색란" onChange={onChange} />
       </InputBox>
       <WriteButton>
         <button>번호등록</button>

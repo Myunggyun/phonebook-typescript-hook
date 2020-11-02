@@ -10,6 +10,9 @@ function Main({ handleSearch }: PropsData) {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleSearch(event.target.value);
   };
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
   return (
     <Home>
       <Logoscreen>
@@ -19,7 +22,7 @@ function Main({ handleSearch }: PropsData) {
         <input type="text" placeholder="검색란" onChange={onChange} />
       </InputBox>
       <WriteButton>
-        <button>번호등록</button>
+        <button onClick={handleClick}>번호등록</button>
       </WriteButton>
     </Home>
   );

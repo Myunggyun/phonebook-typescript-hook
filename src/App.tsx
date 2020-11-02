@@ -3,7 +3,7 @@ import Main from "./Main";
 import PhoneList from "./PhoneList";
 import data from "./data";
 
-interface EmptyArray {
+interface PropsData {
   nickname: string;
 }
 
@@ -12,13 +12,12 @@ function App() {
   const [searchList, get_searchList] = useState<string>("");
 
   const get_data = () => {
-    console.log(searchList, list);
-    if (searchList === "") {
-      get_list(data);
-    } else {
+    if (searchList !== "") {
       get_list(
-        list.filter((x: EmptyArray) => x.nickname.indexOf(searchList) !== -1)
+        data.filter((x: PropsData) => x.nickname.indexOf(searchList) !== -1)
       );
+    } else {
+      get_list(data);
     }
   };
 

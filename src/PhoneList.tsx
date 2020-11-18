@@ -2,7 +2,6 @@ import React from "react";
 import PhoneForm from "./PhoneForm";
 
 interface UserInfo {
-  id: number;
   nickname: string;
   phone: string;
 }
@@ -14,8 +13,8 @@ interface PropsData {
 function PhoneList({ course }: PropsData) {
   return (
     <div>
-      {course.map(list => (
-        <PhoneForm nickname={list.nickname} phone={list.phone} key={list.id} />
+      {course.map((list, index) => (
+        <PhoneForm nickname={list.nickname} phone={list.phone} key={index} />
       ))}
     </div>
   );

@@ -25,11 +25,15 @@ function App() {
     get_searchList(searchData);
   };
 
+  const addData = (form: { nickname: string; phone: string }) => {
+    get_list(list.concat(form));
+  };
+
   useEffect(get_data, [searchList]);
 
   return (
     <div className="App">
-      <Main handleSearch={handleSearch} />
+      <Main handleSearch={handleSearch} handleData={addData} />
       <PhoneList course={list} />
     </div>
   );

@@ -1,28 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./image/logo.jpg";
 import styled from "styled-components";
 
 interface PropsData {
   handleSearch: (data: string) => void;
+  handleData: (form: { nickname: string; phone: string }) => void;
 }
 
-function Main({ handleSearch }: PropsData) {
+function Main({ handleSearch, handleData }: PropsData) {
+  const [form, get_form] = useState({ nickname: "", phone: "" });
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleSearch(event.target.value);
   };
+
+  const handleRegister = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    get_form({ ...form, [name]: value });
+  };
+
+  const { nickname, phone } = form;
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    handleData(form);
+    get_form({ nickname: "", phone: "" });
   };
+
   return (
     <Home>
       <Logoscreen>
         <img src={logo} alt="logo" />
       </Logoscreen>
-      <InputBox>
+      <SearchBox>
         <input type="text" placeholder="검색란" onChange={onChange} />
-      </InputBox>
+      </SearchBox>
+      <Register>
+        <input type="file" />
+        <div>
+          닉네임 :{" "}
+          <input
+            type="text"
+            onChange={handleRegister}
+            name="nickname"
+            value={nickname}
+          />
+        </div>
+        <div>
+          폰번호 :{" "}
+          <input
+            type="text"
+            onChange={handleRegister}
+            name="phone"
+            value={phone}
+          />
+        </div>
+        <div>
+          태그란 : <input type="text" onChange={handleRegister} name="tags" />
+        </div>
+      </Register>
       <WriteButton>
-        <button onClick={handleClick}>번호등록</button>
+        <button onClick={handleClick} type="submit">
+          번호등록
+        </button>
       </WriteButton>
     </Home>
   );
@@ -43,7 +82,7 @@ const Logoscreen = styled.div`
   }
 `;
 
-const InputBox = styled.div`
+const SearchBox = styled.div`
   display: flex;
   justify-content: center;
   input {
@@ -56,6 +95,9 @@ const InputBox = styled.div`
 const WriteButton = styled.div`
   display: flex;
   justify-content: flex-end;
+  background: #b78b94;
+  padding-bottom: 15px;
+
   button {
     background: #fff;
     margin-right: 7px;
@@ -71,4 +113,11 @@ const WriteButton = styled.div`
     color: black;
     transform: translate(0, -5px);
   }
+`;
+
+const Register = styled.div`
+  background: #b78b94;
+  padding-top: 5px;
+  padding-left: 5px;
+  margin-top: 10px;
 `;
